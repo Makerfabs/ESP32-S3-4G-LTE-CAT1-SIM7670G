@@ -18,7 +18,7 @@ HardwareSerial mySerial2(2);
 #define IO_GSM_PWRKEY 4
 #define IO_GSM_RST    5
 
-#define IO_GSM_DTR    7
+
 /*
  * Connect the SD card to the following pins:
  *
@@ -204,12 +204,6 @@ void setup() {
   mySerial2.begin(115200,SERIAL_8N1, IO_RXD2, IO_TXD2);
   pinMode(IO_GSM_RST, OUTPUT);
   digitalWrite(IO_GSM_RST, LOW);
-
-  pinMode(IO_GSM_DTR, OUTPUT);
-  digitalWrite(IO_GSM_DTR, LOW);
-  
-  
-
   
   pinMode(IO_GSM_PWRKEY, OUTPUT);
   digitalWrite(IO_GSM_PWRKEY, HIGH);
@@ -217,9 +211,9 @@ void setup() {
   SD_MMC.setPins(IO_SD_CLK, IO_SD_CMD, IO_SD_D0);
   digitalWrite(IO_GSM_PWRKEY, LOW);
 
-  
+  delay(2000);
 
-  int i = 10;
+  int i = 0;
   Serial.println("\nTesting Module Response...\n");
   Serial.println("****");
   while (i) {
@@ -270,6 +264,7 @@ void setup() {
 
     uint64_t cardSize = SD_MMC.cardSize() / (1024 * 1024);
     Serial.printf("SD_MMC Card Size: %lluMB\n", cardSize);
+    delay(1000);
 
 }
 
